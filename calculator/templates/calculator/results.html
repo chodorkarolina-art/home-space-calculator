@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    Wyniki | HomeSpace Calculator
+    Wynik | HomeSpace Calculator
 {% endblock %}
 
 
@@ -11,14 +11,29 @@
     <section>
 
         <h1>
-            Wyniki obliczeń
+            Wynik obliczenia
         </h1>
 
+        {% if name %}
+            <p>
+                Nazwa obliczenia:
+                <strong>{{ name }}</strong>
+            </p>
+        {% endif %}
+
         <p>
-            Na podstawie podanych danych przygotowaliśmy
-            minimalną i rekomendowaną powierzchnię
-            oraz sugerowaną liczbę pokoi.
+            Na podstawie podanych informacji obliczyliśmy
+            minimalną i rekomendowaną powierzchnię mieszkania.
         </p>
+
+    </section>
+
+
+    <section>
+
+        <h2>
+            Podsumowanie
+        </h2>
 
         <div class="result-summary">
 
@@ -62,26 +77,26 @@
 
         </div>
 
-
-        {% if extra_room_recommendation %}
-
-            <div class="card">
-
-                <h2>
-                    Dodatkowa rekomendacja
-                </h2>
-
-                <p>
-                    <strong>
-                        {{ extra_room_recommendation }}
-                    </strong>
-                </p>
-
-            </div>
-
-        {% endif %}
-
     </section>
+
+
+    {% if extra_room_recommendation %}
+
+        <section class="card">
+
+            <h2>
+                Dodatkowa rekomendacja
+            </h2>
+
+            <p>
+                <strong>
+                    {{ extra_room_recommendation }}
+                </strong>
+            </p>
+
+        </section>
+
+    {% endif %}
 
 
     <section>
@@ -89,6 +104,12 @@
         <h2>
             Podział powierzchni
         </h2>
+
+        <p>
+            Poniżej znajdziesz orientacyjny podział powierzchni
+            na główne funkcje mieszkania.
+        </p>
+
 
         <div class="room-grid">
 
@@ -287,13 +308,7 @@
                 </h3>
 
                 <div class="room-area">
-
-                    {% if area_breakdown.storage_adjustment > 0 %}
-                        +{{ area_breakdown.storage_adjustment }} m²
-                    {% else %}
-                        {{ area_breakdown.storage_adjustment }} m²
-                    {% endif %}
-
+                    {{ area_breakdown.storage_adjustment }} m²
                 </div>
 
                 <a
@@ -316,6 +331,11 @@
                     {{ area_breakdown.communication }} m²
                 </div>
 
+                <p>
+                    Powierzchnia potrzebna na dojścia pomiędzy
+                    głównymi strefami mieszkania.
+                </p>
+
             </div>
 
         </div>
@@ -326,35 +346,78 @@
     <section class="card">
 
         <h2>
-            Co dalej?
+            Jak interpretować wynik?
         </h2>
 
         <p>
-            Możesz zmienić dane i wykonać nowe obliczenie
-            albo wrócić do strony głównej.
+            <strong>Minimalna powierzchnia funkcjonalna</strong>
+            oznacza powierzchnię potrzebną do zapewnienia
+            podstawowych funkcji mieszkania.
         </p>
 
-        <a
-            href="{% url 'calculator' %}"
-            class="button"
-        >
-            Nowe obliczenie
-        </a>
+        <p>
+            <strong>Rekomendowana powierzchnia</strong>
+            uwzględnia dodatkowo potrzeby podane w formularzu,
+            takie jak praca zdalna, hobby, rowery,
+            zwierzęta i przechowywanie.
+        </p>
 
-        <a
-            href="{% url 'home' %}"
-            class="button button-secondary"
-        >
-            Strona główna
-        </a>
+        <p>
+            Wynik ma charakter orientacyjny i służy jako pomoc
+            przy analizowaniu potrzeb mieszkaniowych.
+        </p>
 
-        {% if user.is_authenticated %}
+    </section>
+
+
+    <section class="card">
+
+        <h2>
+            Co dalej?
+        </h2>
+
+
+        {% if user.is_authenticated and calculation_id %}
+
+            <p>
+                To obliczenie zostało zapisane w Twojej historii.
+            </p>
+
+            <a
+                href="{% url 'calculation_edit' calculation_id %}"
+                class="button"
+            >
+                Edytuj obliczenie
+            </a>
+
+            <a
+                href="{% url 'calculator' %}"
+                class="button button-secondary"
+            >
+                Nowe obliczenie
+            </a>
+
+            <a
+                href="{% url 'calculation_delete' calculation_id %}"
+                class="button button-danger"
+            >
+                Usuń obliczenie
+            </a>
 
             <a
                 href="{% url 'history' %}"
                 class="button button-secondary"
             >
                 Moje obliczenia
+            </a>
+
+        {% else %}
+
+            <a
+                href="{% url 'calculator' %}"
+                class="button"
+            >
+                Nowe obliczenie
             </a>
 
         {% endif %}

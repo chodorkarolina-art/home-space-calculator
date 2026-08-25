@@ -8,48 +8,47 @@
 
 {% block content %}
 
-    <div class="card card-small">
+    <section class="card card-small">
 
         <h1>
             Usuń obliczenie
         </h1>
 
         <p>
-            Czy na pewno chcesz usunąć obliczenie z dnia:
-            <strong>
-                {{ calculation.created_at|date:"d.m.Y H:i" }}
-            </strong>?
+            Czy na pewno chcesz usunąć obliczenie:
         </p>
 
         <p>
-            Rekomendowana powierzchnia:
             <strong>
-                {{ calculation.recommended_area }} m²
+                {{ calculation.name }}
             </strong>
         </p>
 
-        <form method="POST">
+        <p>
+            Tej operacji nie będzie można cofnąć.
+        </p>
+
+
+        <form method="post">
 
             {% csrf_token %}
 
             <button
                 type="submit"
-                class="button"
+                class="button button-danger"
             >
                 Usuń obliczenie
             </button>
 
-        </form>
-
-        <p>
             <a
                 href="{% url 'calculation_detail' calculation.id %}"
                 class="button button-secondary"
             >
                 Anuluj
             </a>
-        </p>
 
-    </div>
+        </form>
+
+    </section>
 
 {% endblock %}

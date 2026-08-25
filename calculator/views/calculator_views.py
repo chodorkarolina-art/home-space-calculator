@@ -67,17 +67,10 @@ def calculator_view(request):
                 for key, value in area_breakdown.items()
             }
 
-            request.session["calculation_result"] = {
-                "name": form.cleaned_data["name"],
-                "minimum_area": str(minimum_area),
-                "recommended_area": str(recommended_area),
-                "recommended_rooms": recommended_rooms,
-                "extra_room_recommendation": extra_room_recommendation,
-                "area_breakdown": serialized_breakdown,
-            }
+            calculation_id = None
 
             if request.user.is_authenticated:
-                Calculation.objects.create(
+                calculation = Calculation.objects.create(
                     user=request.user,
                     name=form.cleaned_data["name"],
                     adults=form.cleaned_data["adults"],
@@ -93,6 +86,18 @@ def calculator_view(request):
                     extra_room_recommendation=extra_room_recommendation,
                     area_breakdown=serialized_breakdown,
                 )
+
+                calculation_id = calculation.id
+
+            request.session["calculation_result"] = {
+                "name": form.cleaned_data["name"],
+                "minimum_area": str(minimum_area),
+                "recommended_area": str(recommended_area),
+                "recommended_rooms": recommended_rooms,
+                "extra_room_recommendation": extra_room_recommendation,
+                "area_breakdown": serialized_breakdown,
+                "calculation_id": calculation_id,
+            }
 
             return redirect("results")
 

@@ -15,6 +15,7 @@ def results_view(request):
     }
 
     context = {
+        "name": result.get("name"),
         "minimum_area": Decimal(result["minimum_area"]),
         "recommended_area": Decimal(result["recommended_area"]),
         "recommended_rooms": result["recommended_rooms"],
@@ -22,6 +23,7 @@ def results_view(request):
             "extra_room_recommendation"
         ),
         "area_breakdown": area_breakdown,
+        "calculation_id": result.get("calculation_id"),
     }
 
     return render(
