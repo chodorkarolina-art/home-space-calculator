@@ -1,0 +1,50 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    Logowanie | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card form-card">
+
+        <h1>
+            Logowanie
+        </h1>
+
+        <p>
+            Zaloguj się, aby zapisywać swoje obliczenia
+            i wracać do nich później.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="button"
+            >
+                Zaloguj się
+            </button>
+
+        </form>
+
+        <p>
+            Nie masz jeszcze konta?
+        </p>
+
+        <a
+            href="{% url 'register' %}"
+            class="button button-secondary"
+        >
+            Załóż konto
+        </a>
+
+    </div>
+
+{% endblock %}

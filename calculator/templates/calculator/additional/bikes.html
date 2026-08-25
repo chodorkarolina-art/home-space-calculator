@@ -1,0 +1,45 @@
+{% extends "calculator/base.html" %}
+
+{% block title %}
+    Rowery | HomeSpace Calculator
+{% endblock %}
+
+{% block content %}
+
+    <section class="card">
+
+        <h1>{{ title }}</h1>
+
+        <p>
+            Przyjęta powierzchnia na jeden rower:
+            <strong>{{ area_per_bike }} m²</strong>
+        </p>
+
+        <p>{{ description }}</p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>
+            Co uwzględnia obliczenie?
+        </h2>
+
+        <ul>
+            {% for item in elements %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+    </section>
+
+
+    <a
+        href="{% url 'results' %}"
+        class="button button-secondary"
+    >
+        Wróć do wyników
+    </a>
+
+{% endblock %}

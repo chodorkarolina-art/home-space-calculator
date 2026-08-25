@@ -1,0 +1,40 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    Kalkulator | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card form-card">
+
+        <h1>
+            Kalkulator powierzchni
+        </h1>
+
+        <p>
+            Podaj informacje o domownikach i sposobie życia.
+            Na ich podstawie obliczymy minimalną oraz
+            rekomendowaną powierzchnię mieszkania.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="button"
+            >
+                Oblicz powierzchnię
+            </button>
+
+        </form>
+
+    </div>
+
+{% endblock %}

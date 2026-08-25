@@ -1,0 +1,129 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    Moje obliczenia | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <section>
+
+        <h1>
+            Moje obliczenia
+        </h1>
+
+        <p>
+            Tutaj znajdziesz zapisane wyniki swoich wcześniejszych obliczeń.
+        </p>
+
+    </section>
+
+
+    {% if calculations %}
+
+        {% for calculation in calculations %}
+
+            <section class="card">
+
+                <h2>
+                    {{ calculation.name }}
+                </h2>
+
+                <p>
+                    Data obliczenia:
+                    <strong>
+                        {{ calculation.created_at|date:"d.m.Y H:i" }}
+                    </strong>
+                </p>
+
+                <div class="room-grid">
+
+                    <div class="room-card">
+
+                        <h3>Dorośli</h3>
+
+                        <div class="room-area">
+                            {{ calculation.adults }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="room-card">
+
+                        <h3>Dzieci</h3>
+
+                        <div class="room-area">
+                            {{ calculation.children }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="room-card">
+
+                        <h3>Rowery</h3>
+
+                        <div class="room-area">
+                            {{ calculation.bikes }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="room-card">
+
+                        <h3>Powierzchnia</h3>
+
+                        <div class="room-area">
+                            {{ calculation.recommended_area }} m²
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p>
+                    Przechowywanie:
+                    <strong>
+                        {{ calculation.get_storage_level_display }}
+                    </strong>
+                </p>
+
+                <a
+                    href="{% url 'calculation_detail' calculation.id %}"
+                    class="button"
+                >
+                    Zobacz szczegóły
+                </a>
+
+            </section>
+
+        {% endfor %}
+
+    {% else %}
+
+        <section class="card">
+
+            <h2>
+                Brak zapisanych obliczeń
+            </h2>
+
+            <p>
+                Wykonaj pierwsze obliczenie, aby pojawiło się w historii.
+            </p>
+
+            <a
+                href="{% url 'calculator' %}"
+                class="button"
+            >
+                Przejdź do kalkulatora
+            </a>
+
+        </section>
+
+    {% endif %}
+
+{% endblock %}

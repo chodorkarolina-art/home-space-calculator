@@ -1,0 +1,364 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    Wyniki | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <section>
+
+        <h1>
+            Wyniki obliczeń
+        </h1>
+
+        <p>
+            Na podstawie podanych danych przygotowaliśmy
+            minimalną i rekomendowaną powierzchnię
+            oraz sugerowaną liczbę pokoi.
+        </p>
+
+        <div class="result-summary">
+
+            <div class="result-box">
+
+                <div class="result-label">
+                    Minimalna powierzchnia funkcjonalna
+                </div>
+
+                <div class="result-value">
+                    {{ minimum_area }} m²
+                </div>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <div class="result-label">
+                    Rekomendowana powierzchnia
+                </div>
+
+                <div class="result-value">
+                    {{ recommended_area }} m²
+                </div>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <div class="result-label">
+                    Rekomendowana liczba pokoi
+                </div>
+
+                <div class="result-value">
+                    {{ recommended_rooms }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% if extra_room_recommendation %}
+
+            <div class="card">
+
+                <h2>
+                    Dodatkowa rekomendacja
+                </h2>
+
+                <p>
+                    <strong>
+                        {{ extra_room_recommendation }}
+                    </strong>
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <section>
+
+        <h2>
+            Podział powierzchni
+        </h2>
+
+        <div class="room-grid">
+
+            <div class="room-card">
+
+                <h3>
+                    Salon i jadalnia
+                </h3>
+
+                <div class="room-area">
+                    {{ area_breakdown.living_dining }} m²
+                </div>
+
+                <a
+                    href="{% url 'living_room_detail' %}"
+                    class="detail-link"
+                >
+                    Zobacz szczegóły
+                </a>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <h3>
+                    Kuchnia
+                </h3>
+
+                <div class="room-area">
+                    {{ area_breakdown.kitchen }} m²
+                </div>
+
+                <a
+                    href="{% url 'kitchen_detail' %}"
+                    class="detail-link"
+                >
+                    Zobacz szczegóły
+                </a>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <h3>
+                    Sypialnie
+                </h3>
+
+                <div class="room-area">
+                    {{ area_breakdown.bedrooms }} m²
+                </div>
+
+                <a
+                    href="{% url 'bedroom_detail' %}"
+                    class="detail-link"
+                >
+                    Zobacz szczegóły
+                </a>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <h3>
+                    Łazienka
+                </h3>
+
+                <div class="room-area">
+                    {{ area_breakdown.bathroom }} m²
+                </div>
+
+                <a
+                    href="{% url 'bathroom_detail' %}"
+                    class="detail-link"
+                >
+                    Zobacz szczegóły
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <h2>
+            Dodatkowe potrzeby
+        </h2>
+
+        <div class="room-grid">
+
+            {% if area_breakdown.work > 0 %}
+
+                <div class="room-card">
+
+                    <h3>
+                        Praca zdalna
+                    </h3>
+
+                    <div class="room-area">
+                        +{{ area_breakdown.work }} m²
+                    </div>
+
+                    <a
+                        href="{% url 'work_detail' %}"
+                        class="detail-link"
+                    >
+                        Zobacz szczegóły
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if area_breakdown.hobby > 0 %}
+
+                <div class="room-card">
+
+                    <h3>
+                        Hobby / sport
+                    </h3>
+
+                    <div class="room-area">
+                        +{{ area_breakdown.hobby }} m²
+                    </div>
+
+                    <a
+                        href="{% url 'hobby_detail' %}"
+                        class="detail-link"
+                    >
+                        Zobacz szczegóły
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if area_breakdown.bikes > 0 %}
+
+                <div class="room-card">
+
+                    <h3>
+                        Rowery
+                    </h3>
+
+                    <div class="room-area">
+                        +{{ area_breakdown.bikes }} m²
+                    </div>
+
+                    <a
+                        href="{% url 'bikes_detail' %}"
+                        class="detail-link"
+                    >
+                        Zobacz szczegóły
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if area_breakdown.pets > 0 %}
+
+                <div class="room-card">
+
+                    <h3>
+                        Zwierzęta
+                    </h3>
+
+                    <div class="room-area">
+                        +{{ area_breakdown.pets }} m²
+                    </div>
+
+                    <a
+                        href="{% url 'pets_detail' %}"
+                        class="detail-link"
+                    >
+                        Zobacz szczegóły
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="room-card">
+
+                <h3>
+                    Przechowywanie
+                </h3>
+
+                <div class="room-area">
+
+                    {% if area_breakdown.storage_adjustment > 0 %}
+                        +{{ area_breakdown.storage_adjustment }} m²
+                    {% else %}
+                        {{ area_breakdown.storage_adjustment }} m²
+                    {% endif %}
+
+                </div>
+
+                <a
+                    href="{% url 'storage_detail' %}"
+                    class="detail-link"
+                >
+                    Zobacz szczegóły
+                </a>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <h3>
+                    Komunikacja
+                </h3>
+
+                <div class="room-area">
+                    {{ area_breakdown.communication }} m²
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>
+            Co dalej?
+        </h2>
+
+        <p>
+            Możesz zmienić dane i wykonać nowe obliczenie
+            albo wrócić do strony głównej.
+        </p>
+
+        <a
+            href="{% url 'calculator' %}"
+            class="button"
+        >
+            Nowe obliczenie
+        </a>
+
+        <a
+            href="{% url 'home' %}"
+            class="button button-secondary"
+        >
+            Strona główna
+        </a>
+
+        {% if user.is_authenticated %}
+
+            <a
+                href="{% url 'history' %}"
+                class="button button-secondary"
+            >
+                Moje obliczenia
+            </a>
+
+        {% endif %}
+
+    </section>
+
+{% endblock %}

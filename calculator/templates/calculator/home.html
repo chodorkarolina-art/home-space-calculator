@@ -1,0 +1,73 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="card">
+
+        <h1>
+            Znajdź przestrzeń dopasowaną do Twojego życia
+        </h1>
+
+        <p>
+            HomeSpace Calculator pomaga oszacować minimalną
+            i rekomendowaną powierzchnię mieszkania na podstawie
+            liczby mieszkańców, sposobu życia, pracy,
+            przechowywania oraz dodatkowych potrzeb.
+        </p>
+
+        <p>
+            Algorytm uwzględnia funkcjonalne powierzchnie
+            pomieszczeń oraz strefy ergonomiczne.
+        </p>
+
+        <p>
+            <a
+                href="{% url 'calculator' %}"
+                class="button"
+            >
+                Uruchom kalkulator
+            </a>
+        </p>
+
+    </section>
+
+
+    {% if not user.is_authenticated %}
+
+        <section class="card card-small">
+
+            <h2>
+                Zapisuj swoje obliczenia
+            </h2>
+
+            <p>
+                Kalkulator działa również bez konta.
+                Po zalogowaniu możesz zapisywać wyniki
+                i przeglądać historię wcześniejszych obliczeń.
+            </p>
+
+            <a
+                href="{% url 'login' %}"
+                class="button"
+            >
+                Zaloguj się
+            </a>
+
+            <a
+                href="{% url 'register' %}"
+                class="button button-secondary"
+            >
+                Załóż konto
+            </a>
+
+        </section>
+
+    {% endif %}
+
+{% endblock %}

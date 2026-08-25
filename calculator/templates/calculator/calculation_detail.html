@@ -1,0 +1,204 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    {{ calculation.name }} | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <section>
+
+        <h1>
+            {{ calculation.name }}
+        </h1>
+
+        <p>
+            Obliczenie z dnia:
+            <strong>
+                {{ calculation.created_at|date:"d.m.Y H:i" }}
+            </strong>
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>
+            Dane wejściowe
+        </h2>
+
+        <div class="room-grid">
+
+            <div class="room-card">
+
+                <h3>Dorośli</h3>
+
+                <div class="room-area">
+                    {{ calculation.adults }}
+                </div>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <h3>Dzieci</h3>
+
+                <div class="room-area">
+                    {{ calculation.children }}
+                </div>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <h3>Zwierzęta</h3>
+
+                <div class="room-area">
+                    {{ calculation.pets }}
+                </div>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <h3>Rowery</h3>
+
+                <div class="room-area">
+                    {{ calculation.bikes }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <h3>
+            Praca zdalna
+        </h3>
+
+        <p>
+            <strong>
+                {% if calculation.remote_work %}
+                    Tak
+                {% else %}
+                    Nie
+                {% endif %}
+            </strong>
+        </p>
+
+
+        <h3>
+            Hobby / sport
+        </h3>
+
+        <p>
+            <strong>
+                {% if calculation.hobby %}
+                    Tak
+                {% else %}
+                    Nie
+                {% endif %}
+            </strong>
+        </p>
+
+
+        <h3>
+            Przechowywanie
+        </h3>
+
+        <p>
+            <strong>
+                {{ calculation.get_storage_level_display }}
+            </strong>
+        </p>
+
+    </section>
+
+
+<section>
+
+    <h2>
+        Wynik
+    </h2>
+
+    <div class="result-summary">
+
+        <div class="result-box">
+
+            <div class="result-label">
+                Minimalna powierzchnia funkcjonalna
+            </div>
+
+            <div class="result-value">
+                {{ calculation.minimum_area }} m²
+            </div>
+
+        </div>
+
+
+        <div class="result-box">
+
+            <div class="result-label">
+                Rekomendowana powierzchnia
+            </div>
+
+            <div class="result-value">
+                {{ calculation.recommended_area }} m²
+            </div>
+
+        </div>
+
+
+        <div class="result-box">
+
+            <div class="result-label">
+                Rekomendowana liczba pokoi
+            </div>
+
+            <div class="result-value">
+                {{ calculation.recommended_rooms }}
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    <section class="card">
+
+        <h2>
+            Zarządzaj obliczeniem
+        </h2>
+
+        <a
+            href="{% url 'calculation_edit' calculation.id %}"
+            class="button"
+        >
+            Edytuj obliczenie
+        </a>
+
+        <a
+            href="{% url 'calculation_delete' calculation.id %}"
+            class="button button-secondary"
+        >
+            Usuń obliczenie
+        </a>
+
+        <a
+            href="{% url 'history' %}"
+            class="button button-secondary"
+        >
+            Wróć do historii
+        </a>
+
+    </section>
+
+{% endblock %}

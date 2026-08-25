@@ -1,0 +1,62 @@
+{% extends "calculator/base.html" %}
+
+{% block title %}
+    Salon i jadalnia | HomeSpace Calculator
+{% endblock %}
+
+{% block content %}
+
+    <section class="card">
+
+        <h1>{{ room_name }}</h1>
+
+        <p>
+            Minimalna powierzchnia bazowa:
+            <strong>{{ minimum_area }} m²</strong>
+        </p>
+
+        <p>
+            {{ description }}
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>
+            Co uwzględnia ta powierzchnia?
+        </h2>
+
+        <ul>
+            {% for item in equipment %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>
+            Przykładowe wymiary
+        </h2>
+
+        <ul>
+            {% for example in examples %}
+                <li>{{ example }}</li>
+            {% endfor %}
+        </ul>
+
+    </section>
+
+
+    <a
+        href="{% url 'results' %}"
+        class="button button-secondary"
+    >
+        Wróć do wyników
+    </a>
+
+{% endblock %}

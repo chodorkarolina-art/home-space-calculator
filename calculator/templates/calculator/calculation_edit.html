@@ -1,0 +1,47 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    Edytuj obliczenie | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card form-card">
+
+        <h1>
+            Edytuj obliczenie
+        </h1>
+
+        <p>
+            Zmień dane i ponownie przelicz rekomendowaną powierzchnię.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="button"
+            >
+                Zapisz zmiany i przelicz
+            </button>
+
+        </form>
+
+        <p>
+            <a
+                href="{% url 'calculation_detail' calculation.id %}"
+                class="button button-secondary"
+            >
+                Anuluj
+            </a>
+        </p>
+
+    </div>
+
+{% endblock %}

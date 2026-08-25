@@ -1,0 +1,55 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    Usuń obliczenie | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card card-small">
+
+        <h1>
+            Usuń obliczenie
+        </h1>
+
+        <p>
+            Czy na pewno chcesz usunąć obliczenie z dnia:
+            <strong>
+                {{ calculation.created_at|date:"d.m.Y H:i" }}
+            </strong>?
+        </p>
+
+        <p>
+            Rekomendowana powierzchnia:
+            <strong>
+                {{ calculation.recommended_area }} m²
+            </strong>
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="button"
+            >
+                Usuń obliczenie
+            </button>
+
+        </form>
+
+        <p>
+            <a
+                href="{% url 'calculation_detail' calculation.id %}"
+                class="button button-secondary"
+            >
+                Anuluj
+            </a>
+        </p>
+
+    </div>
+
+{% endblock %}

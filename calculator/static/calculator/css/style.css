@@ -1,0 +1,402 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background-color: #f5f6f4;
+    color: #252825;
+    line-height: 1.6;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.main-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dddddd;
+}
+
+
+.nav-container {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+    color: #25352d;
+    text-decoration: none;
+}
+
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.main-nav a {
+    color: #303630;
+    text-decoration: none;
+}
+
+
+.main-nav a:hover {
+    text-decoration: underline;
+}
+
+
+.nav-register {
+    padding: 9px 16px;
+
+    border: 1px solid #354f42;
+    border-radius: 6px;
+}
+
+
+.username {
+    color: #667068;
+    font-size: 14px;
+}
+
+
+.logout-form {
+    margin: 0;
+}
+
+
+.nav-button {
+    border: none;
+    background: none;
+
+    color: #303630;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+.nav-button:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   GŁÓWNA TREŚĆ
+========================= */
+
+.main-content {
+    min-height: calc(100vh - 160px);
+    padding: 55px 0;
+}
+
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #243129;
+}
+
+
+h2 {
+    font-size: 25px;
+    margin-top: 32px;
+    margin-bottom: 15px;
+    color: #2d3c33;
+}
+
+
+h3 {
+    font-size: 19px;
+    margin-top: 22px;
+    margin-bottom: 8px;
+}
+
+
+p {
+    margin-bottom: 14px;
+}
+
+
+/* =========================
+   KARTY
+========================= */
+
+.card {
+    background-color: #ffffff;
+
+    border: 1px solid #e1e3e0;
+    border-radius: 10px;
+
+    padding: 28px;
+
+    margin-bottom: 25px;
+}
+
+
+.card-small {
+    max-width: 650px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #354f42;
+    color: #ffffff;
+
+    text-decoration: none;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+.button:hover {
+    background-color: #273b31;
+}
+
+
+.button-secondary {
+    background-color: #e7ebe8;
+    color: #27362e;
+}
+
+
+.button-secondary:hover {
+    background-color: #d8ded9;
+}
+
+
+/* =========================
+   FORMULARZE
+========================= */
+
+.form-card {
+    max-width: 700px;
+}
+
+
+form p {
+    margin-bottom: 20px;
+}
+
+
+form label {
+    display: block;
+
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+form input[type="number"],
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form select {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 1px solid #c8ceca;
+    border-radius: 6px;
+
+    background-color: #ffffff;
+}
+
+
+form input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+
+/* =========================
+   WYNIKI
+========================= */
+
+.result-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 25px;
+    margin-bottom: 35px;
+}
+
+
+.result-box {
+    background-color: #ffffff;
+
+    border: 1px solid #e0e3e0;
+    border-radius: 10px;
+
+    padding: 24px;
+}
+
+
+.result-label {
+    color: #69716c;
+    font-size: 14px;
+}
+
+
+.result-value {
+    margin-top: 5px;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    color: #2e493a;
+}
+
+
+/* =========================
+   PODZIAŁ POWIERZCHNI
+========================= */
+
+.room-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+.room-card {
+    background-color: #ffffff;
+
+    border: 1px solid #e1e4e1;
+    border-radius: 10px;
+
+    padding: 24px;
+}
+
+
+.room-area {
+    font-size: 22px;
+    font-weight: bold;
+
+    color: #354f42;
+
+    margin-bottom: 12px;
+}
+
+
+.detail-link {
+    color: #355848;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+.detail-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   LISTY
+========================= */
+
+ul {
+    margin: 15px 0 20px 22px;
+}
+
+
+li {
+    margin-bottom: 7px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.main-footer {
+    background-color: #27342d;
+    color: #ffffff;
+
+    padding: 30px 0;
+}
+
+
+.footer-description {
+    color: #cbd2cd;
+    font-size: 14px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+
+    .main-nav {
+        flex-wrap: wrap;
+    }
+
+
+    .result-summary {
+        grid-template-columns: 1fr;
+    }
+
+
+    .room-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    h1 {
+        font-size: 29px;
+    }
+}

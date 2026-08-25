@@ -1,0 +1,50 @@
+{% extends "calculator/base.html" %}
+
+
+{% block title %}
+    Rejestracja | HomeSpace Calculator
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card form-card">
+
+        <h1>
+            Załóż konto
+        </h1>
+
+        <p>
+            Konto pozwala zapisywać obliczenia,
+            przeglądać historię i edytować wcześniejsze wyniki.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="button"
+            >
+                Zarejestruj się
+            </button>
+
+        </form>
+
+        <p>
+            Masz już konto?
+        </p>
+
+        <a
+            href="{% url 'login' %}"
+            class="button button-secondary"
+        >
+            Zaloguj się
+        </a>
+
+    </div>
+
+{% endblock %}
