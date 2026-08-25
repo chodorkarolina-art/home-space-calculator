@@ -5,6 +5,7 @@ from django.shortcuts import (
     render,
 )
 
+from ..additional_data import ADDITIONAL_DETAILS
 from ..forms import CalculationForm
 from ..models import Calculation
 from ..room_data import ROOM_DETAILS
@@ -48,6 +49,7 @@ def calculation_detail_view(request, calculation_id):
         {
             "calculation": calculation,
             "room_details": ROOM_DETAILS,
+            "additional_details": ADDITIONAL_DETAILS,
         },
     )
 

@@ -299,100 +299,197 @@
                 Dodatkowe potrzeby
             </h2>
 
-            <div class="room-grid">
 
-                {% if calculation.remote_work %}
+            {% if calculation.remote_work %}
 
-                    <div class="room-card">
-
-                        <h3>
-                            Praca zdalna
-                        </h3>
-
-                        <div class="room-area">
-                            +{{ calculation.area_breakdown.work }} m²
-                        </div>
-
-                    </div>
-
-                {% endif %}
-
-
-                {% if calculation.hobby %}
-
-                    <div class="room-card">
-
-                        <h3>
-                            Hobby / sport
-                        </h3>
-
-                        <div class="room-area">
-                            +{{ calculation.area_breakdown.hobby }} m²
-                        </div>
-
-                    </div>
-
-                {% endif %}
-
-
-                {% if calculation.bikes > 0 %}
-
-                    <div class="room-card">
-
-                        <h3>
-                            Rowery
-                        </h3>
-
-                        <div class="room-area">
-                            +{{ calculation.area_breakdown.bikes }} m²
-                        </div>
-
-                    </div>
-
-                {% endif %}
-
-
-                {% if calculation.pets > 0 %}
-
-                    <div class="room-card">
-
-                        <h3>
-                            Zwierzęta
-                        </h3>
-
-                        <div class="room-area">
-                            +{{ calculation.area_breakdown.pets }} m²
-                        </div>
-
-                    </div>
-
-                {% endif %}
-
-
-                <div class="room-card">
+                <div class="card">
 
                     <h3>
-                        Przechowywanie
+                        {{ additional_details.work.name }}
                     </h3>
 
                     <div class="room-area">
-                        {{ calculation.area_breakdown.storage_adjustment }} m²
+                        +{{ calculation.area_breakdown.work }} m²
                     </div>
+
+                    <p>
+                        {{ additional_details.work.description }}
+                    </p>
+
+                    <h3>
+                        Co uwzględnia obliczenie?
+                    </h3>
+
+                    <ul>
+                        {% for item in additional_details.work.elements %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
 
                 </div>
 
+            {% endif %}
 
-                <div class="room-card">
+
+            {% if calculation.hobby %}
+
+                <div class="card">
 
                     <h3>
-                        Komunikacja
+                        {{ additional_details.hobby.name }}
                     </h3>
 
                     <div class="room-area">
-                        {{ calculation.area_breakdown.communication }} m²
+                        +{{ calculation.area_breakdown.hobby }} m²
                     </div>
 
+                    <p>
+                        {{ additional_details.hobby.description }}
+                    </p>
+
+                    <h3>
+                        Co uwzględnia obliczenie?
+                    </h3>
+
+                    <ul>
+                        {% for item in additional_details.hobby.elements %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+
                 </div>
+
+            {% endif %}
+
+
+            {% if calculation.bikes > 0 %}
+
+                <div class="card">
+
+                    <h3>
+                        {{ additional_details.bikes.name }}
+                    </h3>
+
+                    <div class="room-area">
+                        +{{ calculation.area_breakdown.bikes }} m²
+                    </div>
+
+                    <p>
+                        Przyjęta powierzchnia na jeden rower:
+                        <strong>
+                            {{ additional_details.bikes.area_per_bike }} m²
+                        </strong>
+                    </p>
+
+                    <p>
+                        {{ additional_details.bikes.description }}
+                    </p>
+
+                    <h3>
+                        Co uwzględnia obliczenie?
+                    </h3>
+
+                    <ul>
+                        {% for item in additional_details.bikes.elements %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if calculation.pets > 0 %}
+
+                <div class="card">
+
+                    <h3>
+                        {{ additional_details.pets.name }}
+                    </h3>
+
+                    <div class="room-area">
+                        +{{ calculation.area_breakdown.pets }} m²
+                    </div>
+
+                    <p>
+                        Przyjęta powierzchnia na jedno zwierzę:
+                        <strong>
+                            {{ additional_details.pets.area_per_pet }} m²
+                        </strong>
+                    </p>
+
+                    <p>
+                        {{ additional_details.pets.description }}
+                    </p>
+
+                    <h3>
+                        Co uwzględnia obliczenie?
+                    </h3>
+
+                    <ul>
+                        {% for item in additional_details.pets.elements %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="card">
+
+                <h3>
+                    {{ additional_details.storage.name }}
+                </h3>
+
+                <div class="room-area">
+                    {{ calculation.area_breakdown.storage_adjustment }} m²
+                </div>
+
+                <p>
+                    {{ additional_details.storage.description }}
+                </p>
+
+                <h3>
+                    Poziomy przechowywania
+                </h3>
+
+                <ul>
+                    <li>
+                        Mało:
+                        {{ additional_details.storage.small_adjustment }} m²
+                    </li>
+
+                    <li>
+                        Średnio:
+                        {{ additional_details.storage.medium_adjustment }} m²
+                    </li>
+
+                    <li>
+                        Dużo:
+                        {{ additional_details.storage.large_adjustment }} m²
+                    </li>
+                </ul>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    Komunikacja
+                </h3>
+
+                <div class="room-area">
+                    {{ calculation.area_breakdown.communication }} m²
+                </div>
+
+                <p>
+                    Obejmuje podstawową przestrzeń potrzebną na dojścia
+                    pomiędzy głównymi strefami mieszkania.
+                </p>
 
             </div>
 
