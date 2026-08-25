@@ -36,7 +36,7 @@ class Calculation(models.Model):
         choices=STORAGE_CHOICES,
         default="medium",
     )
-    
+
     minimum_area = models.DecimalField(
         max_digits=6,
         decimal_places=2,
@@ -53,6 +53,17 @@ class Calculation(models.Model):
         max_digits=6,
         decimal_places=2,
         null=True,
+        blank=True,
+    )
+
+    extra_room_recommendation = models.CharField(
+        max_length=150,
+        null=True,
+        blank=True,
+    )
+
+    area_breakdown = models.JSONField(
+        default=dict,
         blank=True,
     )
 

@@ -7,7 +7,10 @@ from django.shortcuts import (
 
 from ..forms import CalculationForm
 from ..models import Calculation
+from ..room_data import ROOM_DETAILS
 from ..services import (
+    calculate_area_breakdown,
+    calculate_extra_room_recommendation,
     calculate_minimum_area,
     calculate_recommended_area,
     calculate_recommended_rooms,
@@ -44,6 +47,7 @@ def calculation_detail_view(request, calculation_id):
         "calculator/calculation_detail.html",
         {
             "calculation": calculation,
+            "room_details": ROOM_DETAILS,
         },
     )
 
@@ -67,35 +71,64 @@ def calculation_edit_view(request, calculation_id):
                 commit=False
             )
 
-            updated_calculation.minimum_area = (
-                calculate_minimum_area(
-                    adults=form.cleaned_data["adults"],
-                    children=form.cleaned_data["children"],
-                    storage_level=form.cleaned_data["storage_level"],
-                )
+            minimum_area = calculate_minimum_area(
+                adults=form.cleaned_data["adults"],
+                children=form.cleaned_data["children"],
+                storage_level=form.cleaned_data["storage_level"],
             )
 
-            updated_calculation.recommended_rooms = (
-                calculate_recommended_rooms(
-                    adults=form.cleaned_data["adults"],
-                    children=form.cleaned_data["children"],
-                    remote_work=form.cleaned_data["remote_work"],
-                )
+            recommended_rooms = calculate_recommended_rooms(
+                adults=form.cleaned_data["adults"],
+                children=form.cleaned_data["children"],
+                remote_work=form.cleaned_data["remote_work"],
             )
 
-            updated_calculation.recommended_area = (
-                calculate_recommended_area(
-                    adults=form.cleaned_data["adults"],
-                    children=form.cleaned_data["children"],
-                    pets=form.cleaned_data["pets"],
+            recommended_area = calculate_recommended_area(
+                adults=form.cleaned_data["adults"],
+                children=form.cleaned_data["children"],
+                pets=form.cleaned_data["pets"],
+                remote_work=form.cleaned_data["remote_work"],
+                hobby=form.cleaned_data["hobby"],
+                bikes=form.cleaned_data["bikes"],
+                storage_level=form.cleaned_data["storage_level"],
+            )
+
+            extra_room_recommendation = (
+                calculate_extra_room_recommendation(
                     remote_work=form.cleaned_data["remote_work"],
                     hobby=form.cleaned_data["hobby"],
-                    bikes=form.cleaned_data["bikes"],
-                    storage_level=form.cleaned_data["storage_level"],
                 )
+            )
+
+            area_breakdown = calculate_area_breakdown(
+                adults=form.cleaned_data["adults"],
+                children=form.cleaned_data["children"],
+                pets=form.cleaned_data["pets"],
+                remote_work=form.cleaned_data["remote_work"],
+                hobby=form.cleaned_data["hobby"],
+                bikes=form.cleaned_data["bikes"],
+                storage_level=form.cleaned_data["storage_level"],
+            )
+
+            serialized_breakdown = {
+                key: str(value)
+                for key, value in area_breakdown.items()
+            }
+
+            updated_calculation.minimum_area = minimum_area
+            updated_calculation.recommended_rooms = recommended_rooms
+            updated_calculation.recommended_area = recommended_area
+
+            updated_calculation.extra_room_recommendation = (
+                extra_room_recommendation
+            )
+
+            updated_calculation.area_breakdown = (
+                serialized_breakdown
             )
 
             updated_calculation.user = request.user
+
             updated_calculation.save()
 
             return redirect(

@@ -1,14 +1,14 @@
 {% extends "calculator/base.html" %}
 
 {% block title %}
-    Łazienka | HomeSpace Calculator
+    {{ name }} | HomeSpace Calculator
 {% endblock %}
 
 {% block content %}
 
     <section class="card">
 
-        <h1>{{ room_name }}</h1>
+        <h1>{{ name }}</h1>
 
         <p>
             Minimalna powierzchnia bazowa:
@@ -40,7 +40,7 @@
     <section class="card">
 
         <h2>
-            Przykładowe wymiary wyposażenia
+            Przykładowe wymiary
         </h2>
 
         <ul>
@@ -52,11 +52,15 @@
     </section>
 
 
-    <a
-        href="{% url 'results' %}"
-        class="button button-secondary"
-    >
-        Wróć do wyników
-    </a>
+    <section class="card">
+
+        <a
+            href="{% url 'calculator' %}"
+            class="button"
+        >
+            Przejdź do kalkulatora
+        </a>
+
+    </section>
 
 {% endblock %}

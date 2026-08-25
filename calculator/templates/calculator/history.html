@@ -38,11 +38,69 @@
                     </strong>
                 </p>
 
+
+                <div class="result-summary">
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Minimalna powierzchnia funkcjonalna
+                        </div>
+
+                        <div class="result-value">
+                            {% if calculation.minimum_area %}
+                                {{ calculation.minimum_area }} m²
+                            {% else %}
+                                Brak danych
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Rekomendowana powierzchnia
+                        </div>
+
+                        <div class="result-value">
+                            {% if calculation.recommended_area %}
+                                {{ calculation.recommended_area }} m²
+                            {% else %}
+                                Brak danych
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Rekomendowana liczba pokoi
+                        </div>
+
+                        <div class="result-value">
+                            {% if calculation.recommended_rooms %}
+                                {{ calculation.recommended_rooms }}
+                            {% else %}
+                                Brak danych
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
                 <div class="room-grid">
 
                     <div class="room-card">
 
-                        <h3>Dorośli</h3>
+                        <h3>
+                            Dorośli
+                        </h3>
 
                         <div class="room-area">
                             {{ calculation.adults }}
@@ -53,7 +111,9 @@
 
                     <div class="room-card">
 
-                        <h3>Dzieci</h3>
+                        <h3>
+                            Dzieci
+                        </h3>
 
                         <div class="room-area">
                             {{ calculation.children }}
@@ -64,10 +124,12 @@
 
                     <div class="room-card">
 
-                        <h3>Rowery</h3>
+                        <h3>
+                            Zwierzęta
+                        </h3>
 
                         <div class="room-area">
-                            {{ calculation.bikes }}
+                            {{ calculation.pets }}
                         </div>
 
                     </div>
@@ -75,15 +137,42 @@
 
                     <div class="room-card">
 
-                        <h3>Powierzchnia</h3>
+                        <h3>
+                            Rowery
+                        </h3>
 
                         <div class="room-area">
-                            {{ calculation.recommended_area }} m²
+                            {{ calculation.bikes }}
                         </div>
 
                     </div>
 
                 </div>
+
+
+                <p>
+                    Praca zdalna:
+                    <strong>
+                        {% if calculation.remote_work %}
+                            Tak
+                        {% else %}
+                            Nie
+                        {% endif %}
+                    </strong>
+                </p>
+
+
+                <p>
+                    Hobby / sport:
+                    <strong>
+                        {% if calculation.hobby %}
+                            Tak
+                        {% else %}
+                            Nie
+                        {% endif %}
+                    </strong>
+                </p>
+
 
                 <p>
                     Przechowywanie:
@@ -91,6 +180,7 @@
                         {{ calculation.get_storage_level_display }}
                     </strong>
                 </p>
+
 
                 <a
                     href="{% url 'calculation_detail' calculation.id %}"

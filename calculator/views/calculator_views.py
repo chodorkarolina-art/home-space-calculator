@@ -62,16 +62,18 @@ def calculator_view(request):
                 storage_level=form.cleaned_data["storage_level"],
             )
 
+            serialized_breakdown = {
+                key: str(value)
+                for key, value in area_breakdown.items()
+            }
+
             request.session["calculation_result"] = {
                 "name": form.cleaned_data["name"],
                 "minimum_area": str(minimum_area),
                 "recommended_area": str(recommended_area),
                 "recommended_rooms": recommended_rooms,
                 "extra_room_recommendation": extra_room_recommendation,
-                "area_breakdown": {
-                    key: str(value)
-                    for key, value in area_breakdown.items()
-                },
+                "area_breakdown": serialized_breakdown,
             }
 
             if request.user.is_authenticated:
@@ -88,6 +90,8 @@ def calculator_view(request):
                     minimum_area=minimum_area,
                     recommended_rooms=recommended_rooms,
                     recommended_area=recommended_area,
+                    extra_room_recommendation=extra_room_recommendation,
+                    area_breakdown=serialized_breakdown,
                 )
 
             return redirect("results")

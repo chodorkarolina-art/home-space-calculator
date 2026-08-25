@@ -24,65 +24,422 @@
     </section>
 
 
-    <section class="card">
+    <section>
 
         <h2>
-            Dane wejściowe
+            Wynik
         </h2>
 
-        <div class="room-grid">
+        <div class="result-summary">
 
-            <div class="room-card">
+            <div class="result-box">
 
-                <h3>Dorośli</h3>
+                <div class="result-label">
+                    Minimalna powierzchnia funkcjonalna
+                </div>
 
-                <div class="room-area">
-                    {{ calculation.adults }}
+                <div class="result-value">
+                    {% if calculation.minimum_area %}
+                        {{ calculation.minimum_area }} m²
+                    {% else %}
+                        Brak danych
+                    {% endif %}
                 </div>
 
             </div>
 
 
-            <div class="room-card">
+            <div class="result-box">
 
-                <h3>Dzieci</h3>
+                <div class="result-label">
+                    Rekomendowana powierzchnia
+                </div>
 
-                <div class="room-area">
-                    {{ calculation.children }}
+                <div class="result-value">
+                    {% if calculation.recommended_area %}
+                        {{ calculation.recommended_area }} m²
+                    {% else %}
+                        Brak danych
+                    {% endif %}
                 </div>
 
             </div>
 
 
-            <div class="room-card">
+            <div class="result-box">
 
-                <h3>Zwierzęta</h3>
-
-                <div class="room-area">
-                    {{ calculation.pets }}
+                <div class="result-label">
+                    Rekomendowana liczba pokoi
                 </div>
 
-            </div>
-
-
-            <div class="room-card">
-
-                <h3>Rowery</h3>
-
-                <div class="room-area">
-                    {{ calculation.bikes }}
+                <div class="result-value">
+                    {% if calculation.recommended_rooms %}
+                        {{ calculation.recommended_rooms }}
+                    {% else %}
+                        Brak danych
+                    {% endif %}
                 </div>
 
             </div>
 
         </div>
 
+    </section>
 
-        <h3>
-            Praca zdalna
-        </h3>
+
+    {% if calculation.extra_room_recommendation %}
+
+        <section class="card">
+
+            <h2>
+                Dodatkowa rekomendacja
+            </h2>
+
+            <p>
+                <strong>
+                    {{ calculation.extra_room_recommendation }}
+                </strong>
+            </p>
+
+        </section>
+
+    {% endif %}
+
+
+    {% if calculation.area_breakdown %}
+
+        <section>
+
+            <h2>
+                Podział powierzchni
+            </h2>
+
+
+            <div class="card">
+
+                <h3>
+                    {{ room_details.living_room.name }}
+                </h3>
+
+                <div class="room-area">
+                    {{ calculation.area_breakdown.living_dining }} m²
+                </div>
+
+                <p>
+                    Minimalna powierzchnia bazowa:
+                    <strong>
+                        {{ room_details.living_room.minimum_area }} m²
+                    </strong>
+                </p>
+
+                <p>
+                    {{ room_details.living_room.description }}
+                </p>
+
+                <h3>
+                    Co uwzględnia ta powierzchnia?
+                </h3>
+
+                <ul>
+                    {% for item in room_details.living_room.equipment %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>
+                    Przykładowe wymiary
+                </h3>
+
+                <ul>
+                    {% for example in room_details.living_room.examples %}
+                        <li>{{ example }}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    {{ room_details.kitchen.name }}
+                </h3>
+
+                <div class="room-area">
+                    {{ calculation.area_breakdown.kitchen }} m²
+                </div>
+
+                <p>
+                    Minimalna powierzchnia bazowa:
+                    <strong>
+                        {{ room_details.kitchen.minimum_area }} m²
+                    </strong>
+                </p>
+
+                <p>
+                    {{ room_details.kitchen.description }}
+                </p>
+
+                <h3>
+                    Co uwzględnia ta powierzchnia?
+                </h3>
+
+                <ul>
+                    {% for item in room_details.kitchen.equipment %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>
+                    Przykładowe wymiary
+                </h3>
+
+                <ul>
+                    {% for example in room_details.kitchen.examples %}
+                        <li>{{ example }}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    {{ room_details.bedroom.name }}
+                </h3>
+
+                <div class="room-area">
+                    {{ calculation.area_breakdown.bedrooms }} m²
+                </div>
+
+                <p>
+                    Minimalna powierzchnia bazowa:
+                    <strong>
+                        {{ room_details.bedroom.minimum_area }} m²
+                    </strong>
+                </p>
+
+                <p>
+                    {{ room_details.bedroom.description }}
+                </p>
+
+                <h3>
+                    Co uwzględnia ta powierzchnia?
+                </h3>
+
+                <ul>
+                    {% for item in room_details.bedroom.equipment %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>
+                    Przykładowe wymiary
+                </h3>
+
+                <ul>
+                    {% for example in room_details.bedroom.examples %}
+                        <li>{{ example }}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    {{ room_details.bathroom.name }}
+                </h3>
+
+                <div class="room-area">
+                    {{ calculation.area_breakdown.bathroom }} m²
+                </div>
+
+                <p>
+                    Minimalna powierzchnia bazowa:
+                    <strong>
+                        {{ room_details.bathroom.minimum_area }} m²
+                    </strong>
+                </p>
+
+                <p>
+                    {{ room_details.bathroom.description }}
+                </p>
+
+                <h3>
+                    Co uwzględnia ta powierzchnia?
+                </h3>
+
+                <ul>
+                    {% for item in room_details.bathroom.equipment %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>
+                    Przykładowe wymiary
+                </h3>
+
+                <ul>
+                    {% for example in room_details.bathroom.examples %}
+                        <li>{{ example }}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+                Dodatkowe potrzeby
+            </h2>
+
+            <div class="room-grid">
+
+                {% if calculation.remote_work %}
+
+                    <div class="room-card">
+
+                        <h3>
+                            Praca zdalna
+                        </h3>
+
+                        <div class="room-area">
+                            +{{ calculation.area_breakdown.work }} m²
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if calculation.hobby %}
+
+                    <div class="room-card">
+
+                        <h3>
+                            Hobby / sport
+                        </h3>
+
+                        <div class="room-area">
+                            +{{ calculation.area_breakdown.hobby }} m²
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if calculation.bikes > 0 %}
+
+                    <div class="room-card">
+
+                        <h3>
+                            Rowery
+                        </h3>
+
+                        <div class="room-area">
+                            +{{ calculation.area_breakdown.bikes }} m²
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if calculation.pets > 0 %}
+
+                    <div class="room-card">
+
+                        <h3>
+                            Zwierzęta
+                        </h3>
+
+                        <div class="room-area">
+                            +{{ calculation.area_breakdown.pets }} m²
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="room-card">
+
+                    <h3>
+                        Przechowywanie
+                    </h3>
+
+                    <div class="room-area">
+                        {{ calculation.area_breakdown.storage_adjustment }} m²
+                    </div>
+
+                </div>
+
+
+                <div class="room-card">
+
+                    <h3>
+                        Komunikacja
+                    </h3>
+
+                    <div class="room-area">
+                        {{ calculation.area_breakdown.communication }} m²
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {% else %}
+
+        <section class="card">
+
+            <p>
+                Szczegółowy podział powierzchni nie jest dostępny
+                dla tego starszego obliczenia.
+            </p>
+
+        </section>
+
+    {% endif %}
+
+
+    <section class="card">
+
+        <h2>
+            Dane wejściowe
+        </h2>
 
         <p>
+            Dorośli:
+            <strong>{{ calculation.adults }}</strong>
+        </p>
+
+        <p>
+            Dzieci:
+            <strong>{{ calculation.children }}</strong>
+        </p>
+
+        <p>
+            Zwierzęta:
+            <strong>{{ calculation.pets }}</strong>
+        </p>
+
+        <p>
+            Rowery:
+            <strong>{{ calculation.bikes }}</strong>
+        </p>
+
+        <p>
+            Praca zdalna:
             <strong>
                 {% if calculation.remote_work %}
                     Tak
@@ -92,12 +449,8 @@
             </strong>
         </p>
 
-
-        <h3>
-            Hobby / sport
-        </h3>
-
         <p>
+            Hobby / sport:
             <strong>
                 {% if calculation.hobby %}
                     Tak
@@ -107,69 +460,14 @@
             </strong>
         </p>
 
-
-        <h3>
-            Przechowywanie
-        </h3>
-
         <p>
+            Przechowywanie:
             <strong>
                 {{ calculation.get_storage_level_display }}
             </strong>
         </p>
 
     </section>
-
-
-<section>
-
-    <h2>
-        Wynik
-    </h2>
-
-    <div class="result-summary">
-
-        <div class="result-box">
-
-            <div class="result-label">
-                Minimalna powierzchnia funkcjonalna
-            </div>
-
-            <div class="result-value">
-                {{ calculation.minimum_area }} m²
-            </div>
-
-        </div>
-
-
-        <div class="result-box">
-
-            <div class="result-label">
-                Rekomendowana powierzchnia
-            </div>
-
-            <div class="result-value">
-                {{ calculation.recommended_area }} m²
-            </div>
-
-        </div>
-
-
-        <div class="result-box">
-
-            <div class="result-label">
-                Rekomendowana liczba pokoi
-            </div>
-
-            <div class="result-value">
-                {{ calculation.recommended_rooms }}
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
 
 
     <section class="card">
