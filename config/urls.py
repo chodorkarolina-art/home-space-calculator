@@ -21,5 +21,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include("calculator.api.urls")),
     path("", include("calculator.urls")),
 ]
