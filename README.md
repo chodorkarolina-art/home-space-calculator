@@ -1,10 +1,10 @@
 # HomeSpace Calculator
 
 HomeSpace Calculator to aplikacja webowa napisana w Django, która pomaga
-oszacować powierzchnię mieszkania na podstawie liczby mieszkańców,
-stylu życia oraz dodatkowych potrzeb użytkownika.
+oszacować minimalną i rekomendowaną powierzchnię mieszkania na podstawie
+liczby mieszkańców, stylu życia oraz dodatkowych potrzeb użytkownika.
 
-## Funkcje
+## Główne funkcje
 
 Aplikacja umożliwia:
 
@@ -17,40 +17,40 @@ Aplikacja umożliwia:
 - uwzględnienie hobby i sportu,
 - uwzględnienie liczby rowerów,
 - uwzględnienie potrzeb związanych z przechowywaniem,
-- wyświetlenie podziału powierzchni,
+- wyświetlenie podziału powierzchni na główne funkcje,
+- wyświetlenie szczegółów i założeń dla pomieszczeń,
 - rejestrację i logowanie użytkowników,
 - zapis obliczeń zalogowanego użytkownika,
 - przeglądanie historii obliczeń,
-- wyświetlanie szczegółów zapisanych obliczeń,
-- edycję obliczeń,
-- usuwanie obliczeń.
+- edycję zapisanych obliczeń,
+- usuwanie zapisanych obliczeń,
+- ochronę danych pomiędzy użytkownikami.
 
 ## Technologie
 
 Projekt wykorzystuje:
 
-- Python
-- Django
+- Python 3.12
+- Django 6.1
+- PostgreSQL 17
 - HTML
 - CSS
-- SQLite
+- python-dotenv
+- psycopg2-binary
 - Git
 - GitHub
+- Docker
+- Docker Compose
+- GitHub Actions
 
-## Testy
+## Baza danych
 
-Projekt posiada testy automatyczne obejmujące między innymi:
+Aplikacja korzysta z PostgreSQL.
 
-- logikę obliczeń,
-- formularze,
-- modele,
-- widoki,
-- zapis obliczeń,
-- historię użytkownika,
-- edycję i usuwanie obliczeń,
-- kontrolę dostępu do danych innych użytkowników.
+Dane połączenia do bazy są pobierane ze zmiennych środowiskowych,
+a nie przechowywane bezpośrednio w kodzie projektu.
 
-Uruchomienie testów:
+Przykładowa konfiguracja znajduje się w pliku:
 
-```bash
-python manage.py test
+```text
+.env.example
