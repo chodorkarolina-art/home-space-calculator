@@ -1,0 +1,48 @@
+services:
+
+  db:
+    image: postgres:17-alpine
+
+    container_name: homespace_db
+
+    environment:
+      POSTGRES_DB: home_space_calculator
+      POSTGRES_USER: homespace_user
+      POSTGRES_PASSWORD: homespace_password
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    ports:
+      - "5433:5432"
+
+
+  web:
+    build: .
+
+    container_name: homespace_web
+
+    command: python manage.py runserver 0.0.0.0:8000
+
+    volumes:
+      - .:/app
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      DJANGO_SECRET_KEY: docker-dev-secret-key
+      DJANGO_DEBUG: "True"
+
+      DB_NAME: home_space_calculator
+      DB_USER: homespace_user
+      DB_PASSWORD: homespace_password
+      DB_HOST: db
+      DB_PORT: 5432
+
+    depends_on:
+      - db
+
+
+volumes:
+  postgres_data:
