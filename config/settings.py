@@ -199,3 +199,17 @@ STORAGES = {
 LOGIN_REDIRECT_URL = "calculator"
 
 LOGOUT_REDIRECT_URL = "home"
+
+
+# =========================
+# HTTPS / PROXY SECURITY
+# =========================
+
+SECURE_PROXY_SSL_HEADER = (
+    "HTTP_X_FORWARDED_PROTO",
+    "https",
+)
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://13.60.215.237",
+]
