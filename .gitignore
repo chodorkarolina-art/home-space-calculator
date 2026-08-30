@@ -30,3 +30,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Django collected static files
+staticfiles/
