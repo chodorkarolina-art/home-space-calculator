@@ -223,3 +223,80 @@ class CalculationApiTest(APITestCase):
             ],
         )
         
+    # JWT - POPRAWNE DANE ZWRACAJĄ ACCESS I REFRESH
+
+    def test_jwt_returns_access_and_refresh_tokens(self):
+        response = self.client.post(
+            reverse("token_obtain_pair"),
+            {
+                "username": "user1",
+                "password": "test12345",
+            },
+            format="json",
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+        )
+
+        self.assertIn("access", response.data)
+        self.assertIn("refresh", response.data)
+
+
+    # JWT - ACCESS TOKEN DAJE DOSTĘP DO API
+
+    def test_jwt_access_token_allows_api_access(self):
+        token_response = self.client.post(
+            reverse("token_obtain_pair"),
+            {
+                "username": "user1",
+                "password": "test12345",
+            },
+            format="json",
+        )
+
+        access_token = token_response.data["access"]
+
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f"Bearer {access_token}"
+        )
+
+        response = self.client.get(
+            reverse("api_calculations")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+        )
+
+
+    # JWT - REFRESH TOKEN GENERUJE NOWY ACCESS TOKEN
+
+    def test_jwt_refresh_token_returns_new_access_token(self):
+        token_response = self.client.post(
+            reverse("token_obtain_pair"),
+            {
+                "username": "user1",
+                "password": "test12345",
+            },
+            format="json",
+        )
+
+        refresh_token = token_response.data["refresh"]
+
+        response = self.client.post(
+            reverse("token_refresh"),
+            {
+                "refresh": refresh_token,
+            },
+            format="json",
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+        )
+
+        self.assertIn("access", response.data)
