@@ -17,3 +17,14 @@ class CalculationListAPIView(generics.ListAPIView):
             .filter(user=self.request.user)
             .order_by("-created_at")
         )
+        
+class CalculationDetailAPIView(generics.RetrieveAPIView):
+    serializer_class = CalculationSerializer
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get_queryset(self):
+        return Calculation.objects.filter(
+            user=self.request.user
+        )

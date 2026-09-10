@@ -148,3 +148,78 @@ class CalculationApiTest(APITestCase):
             calculation["recommended_area"],
             "55.00",
         )
+        
+        # UŻYTKOWNIK MOŻE POBRAĆ SWOJĄ KALKULACJĘ PO ID
+
+    def test_user_can_get_own_calculation_by_id(self):
+        self.client.force_authenticate(
+            user=self.user1
+        )
+
+        response = self.client.get(
+            reverse(
+                "api_calculation_detail",
+                kwargs={
+                    "pk": self.user1_calculation.id
+                },
+            )
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+        )
+
+        self.assertEqual(
+            response.data["id"],
+            self.user1_calculation.id,
+        )
+
+        self.assertEqual(
+            response.data["name"],
+            "Obliczenie użytkownika 1",
+        )
+
+
+    # UŻYTKOWNIK NIE MOŻE POBRAĆ CUDZEJ KALKULACJI PO ID
+
+    def test_user_cannot_get_other_users_calculation_by_id(self):
+        self.client.force_authenticate(
+            user=self.user1
+        )
+
+        response = self.client.get(
+            reverse(
+                "api_calculation_detail",
+                kwargs={
+                    "pk": self.user2_calculation.id
+                },
+            )
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_404_NOT_FOUND,
+        )
+
+
+    # NIEZALOGOWANY UŻYTKOWNIK NIE MA DOSTĘPU DO KALKULACJI PO ID
+
+    def test_anonymous_user_cannot_get_calculation_by_id(self):
+        response = self.client.get(
+            reverse(
+                "api_calculation_detail",
+                kwargs={
+                    "pk": self.user1_calculation.id
+                },
+            )
+        )
+
+        self.assertIn(
+            response.status_code,
+            [
+                status.HTTP_401_UNAUTHORIZED,
+                status.HTTP_403_FORBIDDEN,
+            ],
+        )
+        
